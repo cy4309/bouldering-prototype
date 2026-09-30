@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 7f3a9c2e1b8d4a65c0e7f14d6a9b3c28
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 64
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - GameMessage
+  fallbackFontReferences: []
+  customCharacters: "\u78B0\u5230\u9078\u64C7\u8DEF\u7DDA\u5931\u6557\u5B8C\u6210 HoldBlueOrange1234567890"
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  character: 5
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
