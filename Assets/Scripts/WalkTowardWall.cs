@@ -45,11 +45,14 @@ public class WalkTowardWall : MonoBehaviour
             {
                 direction.x += 1f;
             }
+        }
 
-            if (direction.sqrMagnitude > 1f)
-            {
-                direction.Normalize();
-            }
+        Vector2 stick = MoveStick.Axis;
+        direction.x += stick.x;
+        direction.z += stick.y;
+        if (direction.sqrMagnitude > 1f)
+        {
+            direction.Normalize();
         }
 
         Vector3 velocity = body.linearVelocity;

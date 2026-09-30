@@ -111,38 +111,21 @@ public class HoldContact : MonoBehaviour
             return;
         }
 
-        Keyboard keyboard = Keyboard.current;
-        if (keyboard == null)
-        {
-            return;
-        }
-
         if (IsHanging)
         {
             body.useGravity = false;
 
-            if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed)
+            if (DropPressed())
             {
                 LetGo();
                 return;
             }
 
-            float sideways = 0f;
-            if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed)
-            {
-                sideways -= 1f;
-            }
-
-            if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed)
-            {
-                sideways += 1f;
-            }
-
             Vector3 hangVelocity = Vector3.zero;
-            hangVelocity.x = sideways * climbSpeed;
+            hangVelocity.x = Sideways() * climbSpeed;
             body.linearVelocity = hangVelocity;
 
-            if (!keyboard.spaceKey.isPressed)
+            if (!ClimbPressed())
             {
                 waitingForSpaceRelease = false;
                 return;
@@ -157,7 +140,7 @@ public class HoldContact : MonoBehaviour
             return;
         }
 
-        if (!keyboard.spaceKey.isPressed)
+        if (!ClimbPressed())
         {
             if (climbing)
             {
@@ -200,10 +183,32 @@ public class HoldContact : MonoBehaviour
         ApplyClimbVelocity();
     }
 
-    void ApplyClimbVelocity()
+    bool ClimbPressed()
     {
         Keyboard keyboard = Keyboard.current;
-        float sideways = 0f;
+        if (keyboard != null && keyboard.spaceKey.isPressed)
+        {
+            return true;
+        }
+
+        return MoveStick.PushUp;
+    }
+
+    bool DropPressed()
+    {
+        Keyboard keyboard = Keyboard.current;
+        if (keyboard != null && (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed))
+        {
+            return true;
+        }
+
+        return MoveStick.PushDown;
+    }
+
+    float Sideways()
+    {
+        float sideways = MoveStick.Axis.x;
+        Keyboard keyboard = Keyboard.current;
         if (keyboard != null)
         {
             if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed)
@@ -217,8 +222,13 @@ public class HoldContact : MonoBehaviour
             }
         }
 
+        return Mathf.Clamp(sideways, -1f, 1f);
+    }
+
+    void ApplyClimbVelocity()
+    {
         Vector3 velocity = body.linearVelocity;
-        velocity.x = sideways * climbSpeed;
+        velocity.x = Sideways() * climbSpeed;
         velocity.y = climbSpeed;
         velocity.z = 0f;
         body.linearVelocity = velocity;
