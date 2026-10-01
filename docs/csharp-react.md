@@ -80,6 +80,7 @@ Unity 依方法名稱呼叫 `Awake`、`Update`。React 要自己把函式掛進 
 | `keyboard.spaceKey.isPressed` | 這一幀空白鍵正按著 |
 | `keyboard.upArrowKey.isPressed` | 方向鍵。還有 `downArrowKey`、`leftArrowKey`、`rightArrowKey` |
 | `MoveStick.Axis` | 觸控滾輪的方向，`x` 左右、`y` 上下，大約 `-1` 到 `1`。沒有按時是零 |
+| `animator.SetBool("Climbing", true)` | 打開 Animator 的條件，讓它改播另一段動作 |
 | `body.useGravity = false` | 這個物件暫時不受重力 |
 | `body.linearVelocity = Vector3.zero` | 速度歸零 |
 | `hold != climbFromHold` | 碰到的是另一個岩點，不是出發的那個 |
